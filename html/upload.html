@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>上传图片</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="all" href="./layui/css/layui.css" />
+</head>
+
+<body>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="upload-img">上传图片</button>
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" id="show-img">
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <script src="./layui/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use('upload', function () {
+            var $ = layui.jquery;
+            var upload = layui.upload;
+            var uploadInst = upload.render({
+                elem: '#upload-img',
+                url: 'http://localhost:5001/upload/img',
+                accept: 'images',
+                acceptMime: 'image/*',
+                size: 5 * 1024,
+                method:'post',
+                headers:{
+                    'Authorization':'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjczMDlhM2IzNTg2ODM0MTMzN2RjMDhlYTFjOGVlMDNiIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1Mjc3MzIyODcsImV4cCI6MTUyNzczMzE4NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9yZXNvdXJjZXMiLCJhcGkiXSwiY2xpZW50X2lkIjoiZDdhOHNkNDVzYTQ1NTRkYSIsInN1YiI6Ijk2M2RiMjViNzkzMzQ4MGNhZTMyNTdlMjYyYzY0YTI2IiwiYXV0aF90aW1lIjoxNTI3NzMyMjg3LCJpZHAiOiJsb2NhbCIsIm5hbWUiOiIxNzYwMjEzMjI3MiIsIm5pY2tuYW1lIjoiMTc2MDIxMzIyNzIiLCJlbWFpbCI6Ii0xIiwicGhvbmVfbnVtYmVyIjoiMTc2MDIxMzIyNzIiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYXBpIl0sImFtciI6WyJjdXN0b20iXX0.Q-WRWxGYRnDrh_IZm0PD19WMMvf3MxPHKlE4N_7HsyB9k_qfTNjIQHrPD9FDl9mzUA_iMlC4idqxOQR1TlVUCpUarz5Uz3YrVx9dxC2VkdrzIqfB8bZ3Kncip8zoUFuMhzeGGfJNuPUTzP9URnYsfj3_PIY0yFhsr8G94AoK8-_K7LbOf9lAPRKE5RpIVLN3ZK35eTdO2BHsMLAD4z5GaL89eGWKcubbt2nmGwvyiJK45WqWG0RXh_Fs7msLW7phbyfysash8TZncaHtpwvdPeqdjA6hN68o0QCH7604rCiYkeKt8P-MG0A-lMAPFk8Oi3_RXFAmrBXexWIFc_V4RA' 
+                },
+                before: function (obj) {
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function (index, file, result) {
+                        $('#show-img').attr('src', result); //图片链接（base64）
+                    });
+                },
+                error: function () {
+                    //演示失败状态，并实现重传
+                    var message = $('#message');
+                    message.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                    message.find('.demo-reload').on('click', function () {
+                        uploadInst.upload();
+                    });
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
