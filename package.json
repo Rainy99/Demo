@@ -1,0 +1,24 @@
+{
+  "name": "Demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "start":"parcel ./html/views/user/login.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rainy99/Demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rainy99/Demo/issues"
+  },
+  "homepage": "https://github.com/Rainy99/Demo#readme",
+  "dependencies": {
+    
+  }
+}
