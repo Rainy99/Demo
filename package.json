@@ -5,6 +5,7 @@
   "main": "",
   "scripts": {
     "start":"parcel ./html/views/user/login.html",
+    "docker":"docker-cpmpose up -d",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
